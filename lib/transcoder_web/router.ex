@@ -17,7 +17,7 @@ defmodule TranscoderWeb.Router do
   scope "/", TranscoderWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", UploadLive
   end
 
   # Other scopes may use custom stacks.
