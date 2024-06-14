@@ -1,4 +1,8 @@
 defmodule Transcoder.Server do
+  @moduledoc """
+  GenServer that offers transcoding operations for videos.
+  """
+
   use GenServer
   use TranscoderWeb, :verified_routes
   alias Transcoder.Model.Video
@@ -9,6 +13,9 @@ defmodule Transcoder.Server do
     GenServer.start_link(__MODULE__, nil)
   end
 
+  @doc """
+  Asynchronously create copy of video in provided resolution. On completion, caller receives message of form: {:transcode_result, Transcoder.Model.Video}
+  """
   def transcode(pid, video, resolution) when resolution in @supported_resolutions do
     GenServer.cast(pid, {:transcode, video, resolution, self()})
   end
