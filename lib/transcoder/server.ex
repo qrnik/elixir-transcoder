@@ -3,13 +3,21 @@ defmodule Transcoder.Server do
   use TranscoderWeb, :verified_routes
   alias Transcoder.Model.Video
 
+  @supported_resolutions [:"360p", :"480p", :"720p"]
+
   def start_link do
     GenServer.start_link(__MODULE__, nil)
   end
 
-  def transcode(pid, video, resolution) do
+  def transcode(pid, video, resolution) when resolution in @supported_resolutions do
     GenServer.cast(pid, {:transcode, video, resolution, self()})
   end
+
+  def transcode(_pid, _video, resolution) do
+    raise "Unsupported resolution: #{resolution}"
+  end
+
+  def supported_resolutions, do: @supported_resolutions
 
   @impl true
   def init(_) do

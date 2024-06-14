@@ -3,8 +3,6 @@ defmodule TranscoderWeb.UploadLive do
   alias Transcoder.Model.Video
   alias Transcoder.Server
 
-  @resolutions [:"360p", :"480p", :"720p"]
-
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
     {
@@ -37,7 +35,7 @@ defmodule TranscoderWeb.UploadLive do
      socket
      |> put_flash(:info, "Transcoding scheduled")
      |> assign(:transcoded_videos, [])
-     |> assign(:videos_in_progress, MapSet.new(@resolutions))}
+     |> assign(:videos_in_progress, MapSet.new(Server.supported_resolutions()))}
   end
 
   @impl Phoenix.LiveView
@@ -57,7 +55,7 @@ defmodule TranscoderWeb.UploadLive do
     File.cp!(path, Video.path(video))
     {:ok, pid} = Server.start_link()
 
-    for resolution <- @resolutions do
+    for resolution <- Server.supported_resolutions() do
       Server.transcode(pid, video, resolution)
     end
 
