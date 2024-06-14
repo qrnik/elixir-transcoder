@@ -1,6 +1,7 @@
 defmodule TranscoderWeb.UploadLive do
   use TranscoderWeb, :live_view
   alias Transcoder.Model.Video
+  alias Transcoder.Server
 
   @resolutions [:"360p", :"480p", :"720p"]
 
@@ -54,10 +55,10 @@ defmodule TranscoderWeb.UploadLive do
   defp consume_upload(%{path: path}, entry) do
     video = Video.for_upload(path, entry.client_name)
     File.cp!(path, Video.path(video))
-    {:ok, pid} = Transcoder.start_link()
+    {:ok, pid} = Server.start_link()
 
     for resolution <- @resolutions do
-      Transcoder.transcode(pid, video, resolution)
+      Server.transcode(pid, video, resolution)
     end
 
     {:ok, nil}
