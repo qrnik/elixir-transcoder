@@ -1,6 +1,8 @@
 defmodule TranscoderWeb.UploadLive do
-  alias Transcoder.Model.Video
   use TranscoderWeb, :live_view
+  alias Transcoder.Model.Video
+
+  @resolutions [:"360p", :"480p", :"720p"]
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
@@ -26,25 +28,35 @@ defmodule TranscoderWeb.UploadLive do
   def handle_event("save", _params, socket) do
     consume_uploaded_entries(socket, :video, &consume_upload/2)
 
+    for video <- socket.assigns.transcoded_videos do
+      File.rm(Video.path(video))
+    end
+
     {:noreply,
      socket
      |> put_flash(:info, "Transcoding scheduled")
-     |> assign(:transcoded_videos, [])}
+     |> assign(:transcoded_videos, [])
+     |> assign(:videos_in_progress, MapSet.new(@resolutions))}
   end
 
   @impl Phoenix.LiveView
   def handle_info({:transcode_result, video}, socket) do
+    socket = update(socket, :videos_in_progress, &MapSet.delete(&1, video.resolution))
+
+    if MapSet.size(socket.assigns.videos_in_progress) == 0 do
+      original = Video.original(video)
+      File.rm(Video.path(original))
+    end
+
     {:noreply, update(socket, :transcoded_videos, &[video | &1])}
   end
 
   defp consume_upload(%{path: path}, entry) do
-    [_, extension] = String.split(entry.client_name, ".")
-    filename = Path.basename(path) <> "." <> extension
-    video = %Video{filename: filename}
+    video = Video.for_upload(path, entry.client_name)
     File.cp!(path, Video.path(video))
     {:ok, pid} = Transcoder.start_link()
 
-    for resolution <- [:"360p", :"480p", :"720p"] do
+    for resolution <- @resolutions do
       Transcoder.transcode(pid, video, resolution)
     end
 

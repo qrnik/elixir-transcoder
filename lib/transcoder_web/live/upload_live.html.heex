@@ -33,15 +33,15 @@
 </section>
 
 <%= unless @transcoded_videos == [] do %>
-<section>
-  <h1>Transcoded videos</h1>
-  <%= for video <- @transcoded_videos  do %>
-    <article>
-      <h2><%= video.resolution %></h2>
-      <video controls>
-        <source src={Video.src(video)} />
-      </video>
-    </article>
-  <% end %>
-</section>
+  <section>
+    <h1>Transcoded videos</h1>
+    <%= for video <- @transcoded_videos  do %>
+      <article>
+        <h2><%= video.resolution %></h2>
+        <video controls>
+          <source src={Video.src(video)} />
+        </video>
+      </article>
+    <% end %>
+  </section>
 <% end %>

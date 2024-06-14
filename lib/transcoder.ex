@@ -23,10 +23,15 @@ defmodule Transcoder do
     {:noreply, nil}
   end
 
-  defp do_transcode(original, resolution) do
-    new_filename = transcoded_filename(original.filename, resolution)
-    new_video = %Video{filename: new_filename, resolution: resolution}
-    {_, 0} = System.cmd("ffmpeg", ~w(-i #{Video.path(original)} -vf scale=#{scale(resolution)} #{Video.path(new_video)}))
+  defp do_transcode(video, resolution) do
+    new_video = Video.with_resolution(video, resolution)
+
+    {_, 0} =
+      System.cmd(
+        "ffmpeg",
+        ~w(-i #{Video.path(video)} -vf scale=#{scale(resolution)} #{Video.path(new_video)})
+      )
+
     new_video
   end
 
@@ -36,10 +41,5 @@ defmodule Transcoder do
       :"480p" -> "854:480"
       :"720p" -> "1280:720"
     end
-  end
-
-  defp transcoded_filename(filename, resolution) do
-    [name, extension] = String.split(filename, ".")
-    "#{name}_#{resolution}.#{extension}"
   end
 end
