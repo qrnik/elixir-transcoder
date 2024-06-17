@@ -7,7 +7,7 @@ defmodule Transcoder.Server do
   use TranscoderWeb, :verified_routes
   alias Transcoder.Model.Video
 
-  @supported_resolutions [:"360p", :"480p", :"720p"]
+  @supported_resolutions ~w(360p 480p 720p)a
 
   def start_link do
     GenServer.start_link(__MODULE__, nil)
