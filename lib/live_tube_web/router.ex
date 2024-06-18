@@ -1,11 +1,11 @@
-defmodule TranscoderWeb.Router do
-  use TranscoderWeb, :router
+defmodule LiveTubeWeb.Router do
+  use LiveTubeWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, html: {TranscoderWeb.Layouts, :root}
+    plug :put_root_layout, html: {LiveTubeWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -14,19 +14,19 @@ defmodule TranscoderWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", TranscoderWeb do
+  scope "/", LiveTubeWeb do
     pipe_through :browser
 
     live "/", UploadLive
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", TranscoderWeb do
+  # scope "/api", LiveTubeWeb do
   #   pipe_through :api
   # end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
-  if Application.compile_env(:transcoder, :dev_routes) do
+  if Application.compile_env(:live_tube, :dev_routes) do
     # If you want to use the LiveDashboard in production, you should put
     # it behind authentication and allow only admins to access it.
     # If your application does not have an admins-only section yet,
@@ -37,7 +37,7 @@ defmodule TranscoderWeb.Router do
     scope "/dev" do
       pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: TranscoderWeb.Telemetry
+      live_dashboard "/dashboard", metrics: LiveTubeWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end

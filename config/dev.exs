@@ -6,7 +6,7 @@ import Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we can use it
 # to bundle .js and .css sources.
-config :transcoder, TranscoderWeb.Endpoint,
+config :live_tube, LiveTubeWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: {127, 0, 0, 1}, port: 4000],
@@ -15,8 +15,8 @@ config :transcoder, TranscoderWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "bWA5HOUF0AO/HrZDpGNSGaS5pf6cZ0cmYfhMXPbfVrL6li5foFAhJJrJHxbbVR4/",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:transcoder, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:transcoder, ~w(--watch)]}
+    esbuild: {Esbuild, :install_and_run, [:live_tube, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:live_tube, ~w(--watch)]}
   ]
 
 # ## SSL Support
@@ -43,17 +43,17 @@ config :transcoder, TranscoderWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :transcoder, TranscoderWeb.Endpoint,
+config :live_tube, LiveTubeWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/transcoder_web/(controllers|live|components)/.*(ex|heex)$"
+      ~r"lib/live_tube_web/(controllers|live|components)/.*(ex|heex)$"
     ]
   ]
 
 # Enable dev routes for dashboard and mailbox
-config :transcoder, dev_routes: true
+config :live_tube, dev_routes: true
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

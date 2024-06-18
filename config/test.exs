@@ -2,13 +2,13 @@ import Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :transcoder, TranscoderWeb.Endpoint,
+config :live_tube, LiveTubeWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "RNqPE09LCssG9xAeUoXa3tHQTQGKt7AHarAVCk0hx6sNWV6KQYje6ZD5rypqd40M",
   server: false
 
 # In test we don't send emails.
-config :transcoder, Transcoder.Mailer, adapter: Swoosh.Adapters.Test
+config :live_tube, LiveTube.Mailer, adapter: Swoosh.Adapters.Test
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false

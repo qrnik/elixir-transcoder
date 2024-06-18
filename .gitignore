@@ -24,7 +24,7 @@ erl_crash.dump
 /priv/static/uploads
 
 # Ignore package tarball (built via "mix hex.build").
-transcoder-*.tar
+live_tube-*.tar
 
 # Ignore assets that are produced by build tools.
 /priv/static/assets/

@@ -8,8 +8,8 @@ const path = require("path")
 module.exports = {
   content: [
     "./js/**/*.js",
-    "../lib/transcoder_web.ex",
-    "../lib/transcoder_web/**/*.*ex"
+    "../lib/live_tube_web.ex",
+    "../lib/live_tube_web/**/*.*ex"
   ],
   theme: {
     extend: {

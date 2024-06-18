@@ -1,12 +1,12 @@
-defmodule TranscoderWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :transcoder
+defmodule LiveTubeWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :live_tube
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
-    key: "_transcoder_key",
+    key: "_live_tube_key",
     signing_salt: "XtIHvBhs",
     same_site: "Lax"
   ]
@@ -21,9 +21,9 @@ defmodule TranscoderWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :transcoder,
+    from: :live_tube,
     gzip: false,
-    only: TranscoderWeb.static_paths()
+    only: LiveTubeWeb.static_paths()
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
@@ -48,5 +48,5 @@ defmodule TranscoderWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug TranscoderWeb.Router
+  plug LiveTubeWeb.Router
 end

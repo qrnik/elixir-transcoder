@@ -7,18 +7,18 @@
 # General application configuration
 import Config
 
-config :transcoder,
+config :live_tube,
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
-config :transcoder, TranscoderWeb.Endpoint,
+config :live_tube, LiveTubeWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [html: TranscoderWeb.ErrorHTML, json: TranscoderWeb.ErrorJSON],
+    formats: [html: LiveTubeWeb.ErrorHTML, json: LiveTubeWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: Transcoder.PubSub,
+  pubsub_server: LiveTube.PubSub,
   live_view: [signing_salt: "VABFm+aO"]
 
 # Configures the mailer
@@ -28,12 +28,12 @@ config :transcoder, TranscoderWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :transcoder, Transcoder.Mailer, adapter: Swoosh.Adapters.Local
+config :live_tube, LiveTube.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",
-  transcoder: [
+  live_tube: [
     args:
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../assets", __DIR__),
@@ -43,7 +43,7 @@ config :esbuild,
 # Configure tailwind (the version is required)
 config :tailwind,
   version: "3.4.0",
-  transcoder: [
+  live_tube: [
     args: ~w(
       --config=tailwind.config.js
       --input=css/app.css

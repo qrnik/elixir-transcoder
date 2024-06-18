@@ -1,9 +1,9 @@
-defmodule Transcoder.Model.Video do
+defmodule LiveTube.Model.Video do
   @moduledoc """
   Struct representing video file.
   """
 
-  use TranscoderWeb, :verified_routes
+  use LiveTubeWeb, :verified_routes
   alias __MODULE__
 
   defstruct [:upload, :extension, resolution: :original]
@@ -34,7 +34,7 @@ defmodule Transcoder.Model.Video do
   Get filesystem path of underlying video file.
   """
   def path(video) do
-    Path.join([:code.priv_dir(:transcoder), "static", "uploads", filename(video)])
+    Path.join([:code.priv_dir(:live_tube), "static", "uploads", filename(video)])
   end
 
   @doc """

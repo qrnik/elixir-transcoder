@@ -1,12 +1,12 @@
-defmodule TranscoderWeb do
+defmodule LiveTubeWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, components, channels, and so on.
 
   This can be used in your application as:
 
-      use TranscoderWeb, :controller
-      use TranscoderWeb, :html
+      use LiveTubeWeb, :controller
+      use LiveTubeWeb, :html
 
   The definitions below will be executed for every controller,
   component, etc, so keep them short and clean, focused
@@ -40,10 +40,10 @@ defmodule TranscoderWeb do
     quote do
       use Phoenix.Controller,
         formats: [:html, :json],
-        layouts: [html: TranscoderWeb.Layouts]
+        layouts: [html: LiveTubeWeb.Layouts]
 
       import Plug.Conn
-      import TranscoderWeb.Gettext
+      import LiveTubeWeb.Gettext
 
       unquote(verified_routes())
     end
@@ -52,7 +52,7 @@ defmodule TranscoderWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {TranscoderWeb.Layouts, :app}
+        layout: {LiveTubeWeb.Layouts, :app}
 
       unquote(html_helpers())
     end
@@ -84,8 +84,8 @@ defmodule TranscoderWeb do
       # HTML escaping functionality
       import Phoenix.HTML
       # Core UI components and translation
-      import TranscoderWeb.CoreComponents
-      import TranscoderWeb.Gettext
+      import LiveTubeWeb.CoreComponents
+      import LiveTubeWeb.Gettext
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
@@ -98,9 +98,9 @@ defmodule TranscoderWeb do
   def verified_routes do
     quote do
       use Phoenix.VerifiedRoutes,
-        endpoint: TranscoderWeb.Endpoint,
-        router: TranscoderWeb.Router,
-        statics: TranscoderWeb.static_paths()
+        endpoint: LiveTubeWeb.Endpoint,
+        router: LiveTubeWeb.Router,
+        statics: LiveTubeWeb.static_paths()
     end
   end
 

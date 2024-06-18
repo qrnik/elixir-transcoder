@@ -1,7 +1,7 @@
-defmodule TranscoderWeb.UploadLive do
-  use TranscoderWeb, :live_view
-  alias Transcoder.Model.Video
-  alias Transcoder.Server
+defmodule LiveTubeWeb.UploadLive do
+  use LiveTubeWeb, :live_view
+  alias LiveTube.Model.Video
+  alias LiveTube.Server
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do

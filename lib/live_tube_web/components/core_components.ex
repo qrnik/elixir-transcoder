@@ -1,4 +1,4 @@
-defmodule TranscoderWeb.CoreComponents do
+defmodule LiveTubeWeb.CoreComponents do
   @moduledoc """
   Provides core UI components.
 
@@ -16,7 +16,7 @@ defmodule TranscoderWeb.CoreComponents do
   """
   use Phoenix.Component
 
-  import TranscoderWeb.Gettext
+  import LiveTubeWeb.Gettext
   alias Phoenix.HTML.Form
   alias Phoenix.LiveView.JS
 
@@ -662,9 +662,9 @@ defmodule TranscoderWeb.CoreComponents do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(TranscoderWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(LiveTubeWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(TranscoderWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(LiveTubeWeb.Gettext, "errors", msg, opts)
     end
   end
 

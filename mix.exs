@@ -1,9 +1,9 @@
-defmodule Transcoder.MixProject do
+defmodule LiveTube.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :transcoder,
+      app: :live_tube,
       version: "0.1.0",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -18,7 +18,7 @@ defmodule Transcoder.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Transcoder.Application, []},
+      mod: {LiveTube.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -69,10 +69,10 @@ defmodule Transcoder.MixProject do
     [
       setup: ["deps.get", "assets.setup", "assets.build"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind transcoder", "esbuild transcoder"],
+      "assets.build": ["tailwind live_tube", "esbuild live_tube"],
       "assets.deploy": [
-        "tailwind transcoder --minify",
-        "esbuild transcoder --minify",
+        "tailwind live_tube --minify",
+        "esbuild live_tube --minify",
         "phx.digest"
       ]
     ]

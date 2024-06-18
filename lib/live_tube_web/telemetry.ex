@@ -1,4 +1,4 @@
-defmodule TranscoderWeb.Telemetry do
+defmodule LiveTubeWeb.Telemetry do
   use Supervisor
   import Telemetry.Metrics
 
@@ -63,7 +63,7 @@ defmodule TranscoderWeb.Telemetry do
     [
       # A module, function and arguments to be invoked periodically.
       # This function must call :telemetry.execute/3 and a metric must be added above.
-      # {TranscoderWeb, :count_users, []}
+      # {LiveTubeWeb, :count_users, []}
     ]
   end
 end

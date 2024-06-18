@@ -1,5 +1,5 @@
-defmodule TranscoderWeb.PageControllerTest do
-  use TranscoderWeb.ConnCase
+defmodule LiveTubeWeb.PageControllerTest do
+  use LiveTubeWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")

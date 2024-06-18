@@ -1,11 +1,11 @@
-defmodule Transcoder.Server do
+defmodule LiveTube.Server do
   @moduledoc """
   GenServer that offers transcoding operations for videos.
   """
 
   use GenServer
-  use TranscoderWeb, :verified_routes
-  alias Transcoder.Model.Video
+  use LiveTubeWeb, :verified_routes
+  alias LiveTube.Model.Video
 
   @supported_resolutions ~w(360p 480p 720p)a
 
@@ -14,7 +14,7 @@ defmodule Transcoder.Server do
   end
 
   @doc """
-  Asynchronously create copy of video in provided resolution. On completion, caller receives message of form: {:transcode_result, Transcoder.Model.Video}
+  Asynchronously create copy of video in provided resolution. On completion, caller receives message of form: {:transcode_result, LiveTube.Model.Video}
   """
   def transcode(pid, video, resolution) when resolution in @supported_resolutions do
     GenServer.cast(pid, {:transcode, video, resolution, self()})
