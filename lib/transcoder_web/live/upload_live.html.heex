@@ -1,0 +1,47 @@
+<form id="upload-form" phx-submit="save" phx-change="validate">
+  <.live_file_input upload={@uploads.video} />
+  <button type="submit">Upload</button>
+</form>
+
+<section phx-drop-target={@uploads.video.ref}>
+  <%= for entry <- @uploads.video.entries do %>
+    <article class="upload-entry">
+      <figure>
+        <.live_img_preview entry={entry} />
+        <figcaption><%= entry.client_name %></figcaption>
+      </figure>
+
+      <progress value={entry.progress} max="100"><%= entry.progress %>%</progress>
+
+      <button
+        type="button"
+        phx-click="cancel-upload"
+        phx-value-ref={entry.ref}
+        aria-label="cancel"
+      >
+        &times;
+      </button>
+      <%= for err <- upload_errors(@uploads.video, entry) do %>
+        <p class="alert alert-danger"><%= error_to_string(err) %></p>
+      <% end %>
+    </article>
+  <% end %>
+
+  <%= for err <- upload_errors(@uploads.video) do %>
+    <p class="alert alert-danger"><%= error_to_string(err) %></p>
+  <% end %>
+</section>
+
+<%= unless @transcoded_videos == [] do %>
+  <section>
+    <h1>Transcoded videos</h1>
+    <%= for video <- @transcoded_videos  do %>
+      <article>
+        <h2><%= video.resolution %></h2>
+        <video controls>
+          <source src={Video.src(video)} />
+        </video>
+      </article>
+    <% end %>
+  </section>
+<% end %>
