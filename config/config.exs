@@ -8,6 +8,7 @@
 import Config
 
 config :live_tube,
+  ecto_repos: [LiveTube.Repo],
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
@@ -19,7 +20,7 @@ config :live_tube, LiveTubeWeb.Endpoint,
     layout: false
   ],
   pubsub_server: LiveTube.PubSub,
-  live_view: [signing_salt: "VABFm+aO"]
+  live_view: [signing_salt: "le+TZFJp"]
 
 # Configures the mailer
 #

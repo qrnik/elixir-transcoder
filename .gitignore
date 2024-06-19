@@ -21,7 +21,6 @@ erl_crash.dump
 
 # Temporary files, for example, from tests.
 /tmp/
-/priv/static/uploads
 
 # Ignore package tarball (built via "mix hex.build").
 live_tube-*.tar
@@ -36,6 +35,3 @@ live_tube-*.tar
 npm-debug.log
 /assets/node_modules/
 
-
-# Editors
-.vscode

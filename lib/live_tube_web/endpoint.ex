@@ -7,7 +7,7 @@ defmodule LiveTubeWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_live_tube_key",
-    signing_salt: "XtIHvBhs",
+    signing_salt: "bn/aljf1",
     same_site: "Lax"
   ]
 
@@ -31,6 +31,7 @@ defmodule LiveTubeWeb.Endpoint do
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
+    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :live_tube
   end
 
   plug Phoenix.LiveDashboard.RequestLogger,

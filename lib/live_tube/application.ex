@@ -9,6 +9,7 @@ defmodule LiveTube.Application do
   def start(_type, _args) do
     children = [
       LiveTubeWeb.Telemetry,
+      LiveTube.Repo,
       {DNSCluster, query: Application.get_env(:live_tube, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: LiveTube.PubSub},
       # Start the Finch HTTP client for sending emails

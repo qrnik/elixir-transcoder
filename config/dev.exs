@@ -1,5 +1,15 @@
 import Config
 
+# Configure your database
+config :live_tube, LiveTube.Repo,
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  database: "live_tube_dev",
+  stacktrace: true,
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
@@ -13,7 +23,7 @@ config :live_tube, LiveTubeWeb.Endpoint,
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "bWA5HOUF0AO/HrZDpGNSGaS5pf6cZ0cmYfhMXPbfVrL6li5foFAhJJrJHxbbVR4/",
+  secret_key_base: "e+rsf651GA+ua//773QzKjQeZ6wJ2ZxIm2t86nFhbCkuRcT/0yiubm6Dz3hAZM0W",
   watchers: [
     esbuild: {Esbuild, :install_and_run, [:live_tube, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:live_tube, ~w(--watch)]}
