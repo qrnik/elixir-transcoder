@@ -1,4 +1,4 @@
-defmodule LiveTube.Server do
+defmodule LiveTube.Transcoder do
   @moduledoc """
   GenServer that offers transcoding operations for videos.
   """
