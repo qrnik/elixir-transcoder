@@ -1,0 +1,11 @@
+{
+  "name": "live-tube",
+  "version": "1.0.0",
+  "main": "js/app.js",
+  "author": "Paweł Wamej <pwamej@gmail.com>",
+  "license": "ISC",
+  "description": "Phoenix LiveView tutorial project",
+  "dependencies": {
+    "flowbite": "^2.4.1"
+  }
+}
